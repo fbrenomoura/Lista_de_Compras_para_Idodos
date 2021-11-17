@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private static final Integer              recordAudioRequestCode = 1;
     private static final Integer              networkRequestCode     = 2;
     private              boolean              flagOtherOptions       = true;
-    private static       boolean              audioAssistant         = false;
             static       boolean              enableAudioDescription = false;
     private static       SpeechRecognizer     speechRecognizer;
             static       ArrayList<String>    speechAsText;
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     ttsMain.stop();
                 } catch (Exception e){
-                    System.out.println("TTS not speaking - OK");
+                    //TTS NOT SPEAKING - OK
                 }
                 micAnimation.playAnimation();
                 Toast.makeText(MainActivity.this, "OUVINDO...", Toast.LENGTH_LONG).show();
@@ -110,9 +109,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResults(Bundle results) {
                 setSpeechAsText(results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION));
-                System.out.println("Meu log A: " + getSpeechAsText());
                 processSpeech();
-                System.out.println("Meu log B: " + getSpeechAsText());
             }
 
             @Override
@@ -218,16 +215,16 @@ public class MainActivity extends AppCompatActivity {
             callListScreen();
         }
         else
-            outOfPattern(MainActivity.this);
+            outOfPattern(getApplicationContext());
     }
 
-    //IS ARRAY IN PATTER 2 MACARRÃO, 2 FEIJÃO?
+    //IS ARRAY IN PATTERN 2 RICE, 3 ORANGES?
     static boolean isArrayListInPattern(ArrayList<String> elements) {
         boolean processStatus = false;
 
         for (int i = 0; i < elements.size(); i++) {
 
-            if (i % 2 == 0) {
+            if (i % 2 == 0) { //IF NUMBER OK
                 try {
                     Integer n = Integer.parseInt(elements.get(i));
                 } catch (NumberFormatException nfe) {
@@ -237,12 +234,12 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                try {
+                try { //IF NOT AN NUMBER OK
                     Integer n = Integer.parseInt(elements.get(i));
+                    return false;
                 } catch (NumberFormatException nfe) {
-                    return true;
+                    processStatus = true;
                 }
-                processStatus = false;
             }
         }
         return processStatus;
@@ -321,12 +318,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initTTSMain(){
-        ttsMain = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-               ttsMain.setLanguage(new Locale(Locale.getDefault().getLanguage(), Locale.getDefault().getISO3Country()));
-            }
-        });
+        ttsMain = new TextToSpeech(getApplicationContext(), status -> ttsMain.setLanguage(new Locale(Locale.getDefault().getLanguage(), Locale.getDefault().getISO3Country())));
     }
 
     static boolean isEnableAudioDescription() {

@@ -36,7 +36,6 @@ public class GroceryListActivity extends AppCompatActivity {
     private        FloatingActionButton fabMic, fabHelpList;
     private        LottieAnimationView  micAnimationAdd;
     public  static SpeechRecognizer     speechRecognizerAdd;
-    private static TextToSpeech         ttsList;
 
     public ArrayList<String> itemArray = getPreparedArrayList();
     public ArrayList<URL>    imagesURL = GoogleCSE.setImagesOnList(itemArray);
@@ -46,7 +45,6 @@ public class GroceryListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Meu log C: " + itemArray);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list);
 
@@ -86,9 +84,9 @@ public class GroceryListActivity extends AppCompatActivity {
             @Override
             public void onBeginningOfSpeech() {
                 try {
-                    ttsList.stop();
+                    MainActivity.ttsMain.stop();
                 } catch (Exception e){
-                    System.out.println("TTS not speaking - OK");
+                    //TTS not speaking - OK
                 }
 
                 micAnimationAdd.setVisibility(View.VISIBLE);
@@ -137,23 +135,20 @@ public class GroceryListActivity extends AppCompatActivity {
 
         fabMic.setOnClickListener(v -> speechRecognizerAdd.startListening(speechRecognizerIntent));
 
-        fabHelpList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(GroceryListActivity.this);
+        fabHelpList.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(GroceryListActivity.this);
 
-                builder.setTitle(getResources().getString(R.string.helpTitleList));
-                builder.setMessage(getResources().getString(R.string.helpMsgList));
+            builder.setTitle(getResources().getString(R.string.helpTitleList));
+            builder.setMessage(getResources().getString(R.string.helpMsgList));
 
-                builder.setNeutralButton(getResources().getString(R.string.activateTutorial), (dialog, which) -> {
-                    dialog.dismiss();
-                    MainActivity.setEnableAudioDescription(true);
-                    audioDescriptionTutorialList(true);
-                });
-                builder.setNegativeButton(getResources().getString(R.string.close), (dialog, which) -> dialog.dismiss());
+            builder.setNeutralButton(getResources().getString(R.string.activateTutorial), (dialog, which) -> {
+                dialog.dismiss();
+                MainActivity.setEnableAudioDescription(true);
+                audioDescriptionTutorialList(true);
+            });
+            builder.setNegativeButton(getResources().getString(R.string.close), (dialog, which) -> dialog.dismiss());
 
-                builder.show();
-            }
+            builder.show();
         });
     }
 
@@ -219,7 +214,6 @@ public class GroceryListActivity extends AppCompatActivity {
 
             itemArray = getPreparedArrayList();
 
-            System.out.println("Meu log D: " + itemArray);
             try {
                 imagesURL = GoogleCSE.setImagesOnList(itemArray);
             } catch (IOException e) {
@@ -227,7 +221,7 @@ public class GroceryListActivity extends AppCompatActivity {
             }
             recycleAdapter = new RecycleAdapter(GroceryListActivity.this, itemArray, imagesURL);
             recyclerView.setAdapter(recycleAdapter);
-            recycleAdapter.notifyDataSetChanged();
+            //recycleAdapter.notifyDataSetChanged();
         }
         else
             MainActivity.outOfPattern(GroceryListActivity.this);
