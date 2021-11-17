@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Lista de Compras para Idosos</string>
+    <string name="micAnimationUrl">https://assets4.lottiefiles.com/packages/lf20_r44j2bfo.json</string>
+    <string name="micAnimationAddUrl">https://assets4.lottiefiles.com/packages/lf20_qnukhrdg.json</string>
+    <string name="aboutTitle">Sobre a aplicação</string>
+    <string name="micTitle">CLIQUE NO MICROFONE</string>
+    <string name="micText">FALE A QUANTIDADE E EM SEGUIDA O PRODUTO</string>
+    <string name="aboutMessage">Aplicação desenvolvida sem fins lucrativos e com propositos exclusivamente educacionais, para estudos de aplicabilidade de:\n
+    - LottieAnimationView (Lottie API)\n
+    - Picasso library\n
+    - SpeechReconizer API\n
+    - TextToSpeech (TTS API)\n
+    - RecycleView\n
+    - Google Cloud Plataform\n
+    - Google Custom Search API\n
+    - Kanban\n
+    - Clean Code\n\nIcones produzidos por: Freepik, Pixel perfect, Aneesh Ravi, Maxim Basinski Premium, EmojiSky, Vasyl Kolodiychyk.\n\n\nBreno Moura é Bacharel Engenheiro de Computação (Universidade federal do Ceará), Mestrando em Computação,
+    Comunicação e Artes (Universidade Federal da Paraíba) e é atualmente Engenheiro de Software na iniciativa privada.\n\n E-mail: fbrenomoura@gmail.com</string>
+
+    <string name="reconFailure">Falha no reconhecimento</string>
+    <string name="helpTitle">Como usar o aplicativo:</string>
+    <string name="helpMsg">Clique no microfone e fale na ordem quantidade de itens e produto, exemplo:
+    5 feijões, 1 arroz, 2 cebolas, 1 macarrão.\n\nPrecisa de mais ajuda? Ative o tutorial em audiodescrição.</string>
+
+    <string name="helpTitleList">Como usar a lista:</string>
+    <string name="helpMsgList">- Toque em um produto para marcar como comprado\n- Pressione o produto para alterar a quantidade
+    \n- Arraste para o lado para remover o produto da lista\n- Toque no microfone para adicionar outro produto
+    \n\nPrecisa de mais ajuda? Ative o tutorial em audiodescrição.</string>
+
+    <string name="outOfPatternMsg">Audio fora do padrão, fale a quantidade em seguida o produto:
+    5 feijões, 1 arroz, 2 cebolas, 1 macarrão.\n\nPrecisa de mais ajuda? Ative o tutorial em audiodescrição no menu de ajuda.</string>
+
+    <string name="internetFailureTitle">Sem conexão com a internet</string>
+    <string name="internetFailureMessage">Esse aplicativo precisa de uma conexão ativa com a internet para funcionar adequadamente.</string>
+    <string name="tryAgain">Tentar novamente</string>
+    <string name="exit">Sair</string>
+    <string name="close">Fechar</string>
+    <string name="activateTutorial">Ativar audiodescrição</string>
+
+    <string name="audioTutorialMain">Olá, bem vindo ao tutorial em audiodescrição. Vou te ajudar a usar esse aplicativo.
+        Ao tocar no microfone. A animação do microfone será iniciada. Esse é o indicativo de que o aplicativo estará te ouvindo.
+        Nesse momento você pode falar a quantidade e em seguida o produto que deseja adicionar na lista.
+        Por exemplo: 3 Cenouras, 5 cebolas, 4 farinhas... Ao terminar de falar. A animação do microfone irá pausar.
+        Indicativo de que a aplicação parou de ouvir. e está processando a sua lista de compras. Se o aplicativo entender
+        corretamente o que você falou. sua lista será exibida, caso contrario uma mensagem de erro é exibida, informando que você deverá tentar novamente.</string>
+
+    <string name="audioTutorialList">Essa é a sua lista de compras. Você pode tocar em um item rapidamente para marcar como comprado. Arrastar o item para fora para remover,
+    pressionar o item para alterar a sua quantidade. Para adicionar um novo item toque no microfone azul e fale a quantidade em seguida o nome do produto.</string>
+
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayoutRL"
+    tools:context=".GroceryListActivity">
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="34dp"
+        android:layout_marginBottom="34dp"
+        android:src="@drawable/mic"
+        android:id="@+id/fabMicAdd"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        app:fabSize="normal"
+        android:contentDescription="Image"
+        app:backgroundTint="@color/projectColor"
+        app:tint="@color/white"/>
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/micanimationadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:elevation="2dp"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        app:lottie_url="@string/micAnimationAddUrl" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/fabMicAdd">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabHelpList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/question"
+            app:fabSize="mini"
+            app:backgroundTint="@color/projectColor"
+            app:tint="@color/white"
+            android:layout_marginRight="38dp"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

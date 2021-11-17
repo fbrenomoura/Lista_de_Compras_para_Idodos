@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="?attr/selectableItemBackground"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0sp"
+        app:cardBackgroundColor="@color/white" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewRv"
+            android:src="@drawable/arroz"
+            />
+
+        <TextView
+            android:id="@+id/itemRvTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="20sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="test"
+            android:textSize="45sp"
+            android:shadowColor="@color/shadow"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="1"
+            android:textColor="@color/white"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddQtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="24dp"
+            android:layout_gravity="right|center"
+            android:src="@drawable/plus"
+            android:visibility="gone"
+            app:backgroundTint="@color/white"
+            app:tint="@color/addColor" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRemoveQtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="24dp"
+            android:layout_gravity="left|center"
+            android:src="@drawable/minus"
+            android:visibility="gone"
+            app:backgroundTint="@color/white"
+            app:tint="@color/closeColor" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
