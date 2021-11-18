@@ -41,6 +41,7 @@ public class GroceryListActivity extends AppCompatActivity {
     public ArrayList<URL>    imagesURL = GoogleCSE.setImagesOnList(itemArray);
 
     public GroceryListActivity() throws IOException {
+
     }
 
     @Override

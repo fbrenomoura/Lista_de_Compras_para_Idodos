@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             static       ArrayList<String>    speechAsText;
     private              LottieAnimationView  micAnimation;
     private              FloatingActionButton fabPlus, fabHelp, fabAbout;
-            static       TextToSpeech ttsMain;
+            static       TextToSpeech         ttsMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             callListScreen();
         }
         else
-            outOfPattern(getApplicationContext());
+            outOfPattern(MainActivity.this);
     }
 
     //IS ARRAY IN PATTERN 2 RICE, 3 ORANGES?
@@ -255,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
         builder.setTitle(R.string.reconFailure);
         builder.setMessage(R.string.outOfPatternMsg);
+
         builder.create().show();
     }
 

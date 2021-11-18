@@ -12,17 +12,19 @@ public class GoogleCSE {
     private final static String apiKey         = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
     private final static String searchEngineID = "124702026900ad302";
 
-    static URL getImageCSE(String query) throws IOException {
+    static URL getImageCSE(String query, boolean useRestrictedApi) throws IOException {
         String            link;
         List<String>      linkList      = new ArrayList<>();
         URL               imageURL      = null;
         HttpURLConnection urlConnection;
+        String            apiUrlRequest;
 
-        //Site restricted JSON API results
-        //URL url = new URL("https://www.googleapis.com/customsearch/v1/siterestrict?key=" + apiKey + "&cx=" + searchEngineID + "&q=imagesize%3A1200x600+" + query + "&searchType=image");
+        if (useRestrictedApi)
+            apiUrlRequest = "https://www.googleapis.com/customsearch/v1/siterestrict?key=" + apiKey + "&cx=" + searchEngineID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
+        else
+            apiUrlRequest = "https://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + searchEngineID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
 
-        //All web results
-        URL url = new URL("https://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + searchEngineID + "&q=imagesize%3A1200x600+" + query + "&searchType=image");
+        URL url = new URL(apiUrlRequest);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -53,6 +55,8 @@ public class GoogleCSE {
             urlConnection.setInstanceFollowRedirects(true);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) { //IMAGES NOT FOUND - USE BLACK SCREEN INSTEAD
+            imageURL = new URL("https://www.solidbackgrounds.com/images/1200x600/1200x600-black-solid-color-background.jpg");
         }
 
         return imageURL;
@@ -62,8 +66,13 @@ public class GoogleCSE {
         ArrayList<URL> imagesUrl = new ArrayList<>();
 
         for(int i = 0; i < items.size(); i++){
-                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1]));
-                System.out.println("URL RESULT: " + imagesUrl.get(i).toString());
+            try {
+                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], false));
+            } catch (Exception e) {
+                //ALL WEB SEARCH API QUOTA REACHED LIMIT - USE RESTRICTED API INSTEAD
+                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], true));
+            }
+
         }
         return imagesUrl;
     }
