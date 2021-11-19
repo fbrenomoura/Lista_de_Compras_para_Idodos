@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Grocery List for the Elderly</string>
+    <string name="aboutTitle">About the application</string>
+    <string name="micTitle">CLICK ON THE MICROPHONE</string>
+    <string name="micText">SPEAK THE QUANTITY AND THEN THE PRODUCT</string>
+    <string name="aboutMessage">"Application developed for non-profit and educational purposes only, to study the applicability of:      - LottieAnimationView (Lottie API)      - Picasso library      - SpeechReconizer API      - TextToSpeech (TTS API)      - RecycleView      - Google Cloud Platform      - Google Custom Search API      -SonarQube      - Kanban      - Clean Code  Icons produced by: Freepik, Pixel perfect, Aneesh Ravi, SolidsBackgrounds.com, Maxim Basinski Premium, EmojiSky, Vasyl Kolodiychyk.   Breno Moura is Bachelor's Degree in Computer Engineering (Federal University of Ceará), MSc,     Communication and Arts (Federal University of Paraíba) and is currently a Software Engineer in private enterprise.   E-mail: fbrenomoura@gmail.com "</string>
+    <string name="reconFailure">Recognition failure</string>
+    <string name="helpTitle">How to use the application:</string>
+    <string name="helpMsg">Click on the microphone and speak in order of quantity of items and product, example:     5 beans, 1 rice, 2 onions, 1 noodles.  Need more help? Activate the audio description tutorial.</string>
+    <string name="helpTitleList">How to use the list:</string>
+    <string name="helpMsgList">- Tap a product to mark it as purchased - Long press the product to change the quantity      - Drag sideways to remove the product from the list - Tap the microphone to add another product       Need more help? Activate the audio description tutorial.</string>
+    <string name="outOfPatternMsg">Audio outside the standard, state the quantity then the product:     5 beans, 1 rice, 2 onions, 1 noodle.  Need more help? Activate the audio description tutorial in the help menu.</string>
+    <string name="internetFailureTitle">No Internet connection</string>
+    <string name="internetFailureMessage">This application needs an active Internet connection to work properly.</string>
+    <string name="tryAgain">Try again</string>
+    <string name="exit">Exit</string>
+    <string name="close">Close</string>
+    <string name="purchased">"PURCHASED "</string>
+    <string name="listening">LISTENING...</string>
+    <string name="processing">WAIT PROCESSING...</string>
+    <string name="removed">Item removed</string>
+    <string name="permissionOk">AUDIO PERMISSION GRANTED</string>
+    <string name="swipeToRemove">SWIPE TO REMOVE</string>
+    <string name="activateTutorial">Activate audio description</string>
+    <string name="audioTutorialMain">Hello, welcome to the tutorial on audio description. I\'m going to help you use this application.         When you tap the microphone. The microphone animation will start. This is the indication that the application is listening to you.         At this point you can say the quantity and then the product you want to add to the list.         For example: 3 carrots, 5 onions, 4 flours... When you finish speaking. The microphone animation will pause.         This indicates that the application has stopped listening. and is processing your shopping list. If the application correctly understands         correctly what you said, your list will be displayed, otherwise an error message is displayed, telling you to try again.</string>
+    <string name="audioTutorialList">This is your shopping list. You can tap on an item quickly to mark it as purchased. Drag the item out to remove it,     tap the item to change its quantity. To add a new item tap the blue microphone and speak the quantity then the product name.</string>
+    <string name="linktree">Author networks</string>
+</resources>

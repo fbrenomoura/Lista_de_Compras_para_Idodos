@@ -39,3 +39,21 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
+
+apply plugin: 'org.sonarqube'
+
+
+sonarqube
+        {
+            properties
+                    {
+                        property "sonar.projectName", "App compras para idosos"
+                        property "sonar.projectKey", "com.breno.listadecomprasparaidosos"
+                        property "sonar.language", "kotlin"
+                        property "sonar.sources", "src/main/java/"
+                        property "sonar.binaries", "build"
+                        property "sonar.sourceEncoding", "UTF-8"
+                        property "sonar.login", "admin"
+                        property "sonar.password", "84077125"
+                    }
+        }

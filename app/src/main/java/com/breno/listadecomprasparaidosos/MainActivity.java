@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -156,6 +157,12 @@ public class MainActivity extends AppCompatActivity {
             builder.setMessage(getResources().getString(R.string.aboutMessage));
             builder.setNegativeButton(getResources().getString(R.string.close), (dialog, which) -> dialog.dismiss());
 
+            builder.setNeutralButton(getResources().getString(R.string.linktree), (dialog, which) -> {
+                Intent link = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linktr.ee/fbrenomoura"));
+                startActivity(link);
+                dialog.dismiss();
+            });
+
             builder.show();
         });
 
@@ -170,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 setEnableAudioDescription(true);
                 audioDescriptionTutorialMain();
             });
+
             builder.setNegativeButton(getResources().getString(R.string.close), (dialog, which) -> dialog.dismiss());
 
             builder.show();
@@ -253,8 +261,10 @@ public class MainActivity extends AppCompatActivity {
     static void outOfPattern(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        builder.setTitle(R.string.reconFailure);
-        builder.setMessage(R.string.outOfPatternMsg);
+        builder.setTitle(context.getResources().getString(R.string.reconFailure));
+        builder.setMessage(context.getResources().getString(R.string.outOfPatternMsg));
+
+        builder.setNegativeButton(context.getResources().getString(R.string.close), (dialog, which) -> dialog.dismiss());
 
         builder.create().show();
     }

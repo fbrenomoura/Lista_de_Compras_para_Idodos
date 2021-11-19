@@ -11,19 +11,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleCSE extends Thread {
-    private final static String  apiKey         = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
-    private final static String  searchEngineID = "124702026900ad302";
-    private       static boolean useRestrictedApi;
-    private       static String  query;
-    private       static URL     imageURL       = null;
+    private static final String  API_KEY          = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
+    private static final String  SEARCH_ENGINE_ID = "124702026900ad302";
+    private static       boolean useRestrictedApi;
+    private static       String  query;
+    private static       URL     imageURL       = null;
 
-    private static URL getImageCSE(String queryTerm, boolean restrictedApi) throws InterruptedException {
+    private static URL getImageCSE(String queryTerm, boolean restrictedApi) {
         useRestrictedApi = restrictedApi;
         query            = queryTerm;
 
         Thread downloadThread = new GoogleCSE();
         downloadThread.start();
-        downloadThread.join();
+
+        try{
+            downloadThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         return imageURL;
     }
@@ -36,11 +42,7 @@ public class GoogleCSE extends Thread {
                 imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], false));
             } catch (Exception e) {
                 //ALL WEB SEARCH API QUOTA REACHED LIMIT - USE RESTRICTED API INSTEAD
-                try {
-                    imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], true));
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                }
+                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], true));
             }
 
         }
@@ -56,9 +58,9 @@ public class GoogleCSE extends Thread {
         String            apiUrlRequest;
 
         if (useRestrictedApi)
-            apiUrlRequest = "https://www.googleapis.com/customsearch/v1/siterestrict?key=" + apiKey + "&cx=" + searchEngineID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
+            apiUrlRequest = "https://www.googleapis.com/customsearch/v1/siterestrict?key=" + API_KEY + "&cx=" + SEARCH_ENGINE_ID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
         else
-            apiUrlRequest = "https://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + searchEngineID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
+            apiUrlRequest = "https://www.googleapis.com/customsearch/v1?key=" + API_KEY + "&cx=" + SEARCH_ENGINE_ID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
 
         URL url = null;
         try {

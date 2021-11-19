@@ -36,7 +36,7 @@ public class GroceryListActivity extends AppCompatActivity {
     private        FloatingActionButton fabMic, fabHelpList;
 
     private        LottieAnimationView  micAnimationAdd;
-    private  static SpeechRecognizer    speechRecognizerAdd;
+    private static SpeechRecognizer    speechRecognizerAdd;
 
     private ArrayList<String> itemArray = getPreparedArrayList();
     private ArrayList<URL>    imagesURL = GoogleCSE.setImagesOnList(itemArray);

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Lista de Compras para Idosos</string>
-    <string name="micAnimationUrl">https://assets4.lottiefiles.com/packages/lf20_r44j2bfo.json</string>
-    <string name="micAnimationAddUrl">https://assets4.lottiefiles.com/packages/lf20_qnukhrdg.json</string>
+    <string name="micAnimationUrl" translatable="false">https://assets4.lottiefiles.com/packages/lf20_r44j2bfo.json</string>
+    <string name="micAnimationAddUrl" translatable="false">https://assets4.lottiefiles.com/packages/lf20_qnukhrdg.json</string>
     <string name="aboutTitle">Sobre a aplicação</string>
     <string name="micTitle">CLIQUE NO MICROFONE</string>
     <string name="micText">FALE A QUANTIDADE E EM SEGUIDA O PRODUTO</string>
@@ -13,6 +13,7 @@
     - RecycleView\n
     - Google Cloud Plataform\n
     - Google Custom Search API\n
+    - SonarQube
     - Kanban\n
     - Clean Code\n\nIcones produzidos por: Freepik, Pixel perfect, Aneesh Ravi, SolidsBackgrounds.com, Maxim Basinski Premium, EmojiSky, Vasyl Kolodiychyk.\n\n\nBreno Moura é Bacharel Engenheiro de Computação (Universidade federal do Ceará), Mestrando em Computação,
     Comunicação e Artes (Universidade Federal da Paraíba) e é atualmente Engenheiro de Software na iniciativa privada.\n\n E-mail: fbrenomoura@gmail.com</string>
@@ -35,12 +36,13 @@
     <string name="tryAgain">Tentar novamente</string>
     <string name="exit">Sair</string>
     <string name="close">Fechar</string>
-    <string name="purchased">COMPROU</string>
+    <string name="purchased">COMPROU </string>
     <string name="listening">OUVINDO...</string>
     <string name="processing">AGUARDE PROCESSANDO...</string>
+    <string name="linktree">Conheça o autor</string>
     <string name="removed">Item removido</string>
-    <string name="permissionOk">Permissão de audio concedida</string>
-    <string name="swipeToRemove">Arraste para o lado para remover</string>
+    <string name="permissionOk">PERMISSÃO DE AUDIO CONCEDIDA</string>
+    <string name="swipeToRemove">ARRASTE PARA O LADO PARA REMOVER</string>
     <string name="activateTutorial">Ativar audiodescrição</string>
 
     <string name="audioTutorialMain">Olá, bem vindo ao tutorial em audiodescrição. Vou te ajudar a usar esse aplicativo.
