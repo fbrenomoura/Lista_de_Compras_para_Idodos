@@ -4,18 +4,54 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoogleCSE {
-    private final static String apiKey         = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
-    private final static String searchEngineID = "124702026900ad302";
+public class GoogleCSE extends Thread {
+    private final static String  apiKey         = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
+    private final static String  searchEngineID = "124702026900ad302";
+    private       static boolean useRestrictedApi;
+    private       static String  query;
+    private       static URL     imageURL       = null;
 
-    static URL getImageCSE(String query, boolean useRestrictedApi) throws IOException {
+    private static URL getImageCSE(String queryTerm, boolean restrictedApi) throws InterruptedException {
+        useRestrictedApi = restrictedApi;
+        query            = queryTerm;
+
+        Thread downloadThread = new GoogleCSE();
+        downloadThread.start();
+        downloadThread.join();
+
+        return imageURL;
+    }
+
+    static ArrayList<URL> setImagesOnList(ArrayList<String> items) throws IOException {
+        ArrayList<URL> imagesUrl = new ArrayList<>();
+
+        for(int i = 0; i < items.size(); i++){
+            try {
+                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], false));
+            } catch (Exception e) {
+                //ALL WEB SEARCH API QUOTA REACHED LIMIT - USE RESTRICTED API INSTEAD
+                try {
+                    imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], true));
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+            }
+
+        }
+        return imagesUrl;
+    }
+
+    //NETWORK OPERATION - GETTING IMAGE URL
+    @Override
+    public void run() {
         String            link;
         List<String>      linkList      = new ArrayList<>();
-        URL               imageURL      = null;
         HttpURLConnection urlConnection;
         String            apiUrlRequest;
 
@@ -24,17 +60,44 @@ public class GoogleCSE {
         else
             apiUrlRequest = "https://www.googleapis.com/customsearch/v1?key=" + apiKey + "&cx=" + searchEngineID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
 
-        URL url = new URL(apiUrlRequest);
+        URL url = null;
+        try {
+            url = new URL(apiUrlRequest);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
+        HttpURLConnection conn = null;
+        try {
+            conn = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            conn.setRequestMethod("GET");
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
+
         conn.setRequestProperty("Accept", "application/json");
-        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+        BufferedReader br = null;
+
+        try {
+            br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //The response is json
         //Process to find URL from json
-        String output;
-        while ((output = br.readLine()) != null) {
+        String output = null;
+        while (true) {
+            try {
+                if ((output = br.readLine()) == null) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             if (output.contains("\"link\": \"")) {
 
@@ -56,25 +119,12 @@ public class GoogleCSE {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) { //IMAGES NOT FOUND - USE BLACK SCREEN INSTEAD
-            imageURL = new URL("https://www.solidbackgrounds.com/images/1200x600/1200x600-black-solid-color-background.jpg");
-        }
-
-        return imageURL;
-    }
-
-    static ArrayList<URL> setImagesOnList(ArrayList<String> items) throws IOException {
-        ArrayList<URL> imagesUrl = new ArrayList<>();
-
-        for(int i = 0; i < items.size(); i++){
             try {
-                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], false));
-            } catch (Exception e) {
-                //ALL WEB SEARCH API QUOTA REACHED LIMIT - USE RESTRICTED API INSTEAD
-                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], true));
+                imageURL = new URL("https://www.solidbackgrounds.com/images/1200x600/1200x600-black-solid-color-background.jpg");
+            } catch (MalformedURLException malformedURLException) {
+                malformedURLException.printStackTrace();
             }
-
         }
-        return imagesUrl;
     }
 
 }

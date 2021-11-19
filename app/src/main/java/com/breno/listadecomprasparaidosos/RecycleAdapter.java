@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,8 +48,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
         //SHORT CLICK TO MARK AS PURCHASED
         holder.imageView.setOnClickListener(v -> {
-
-            //COMPROU INTEM - PETRO E BRANCO E TRACEJADO
             ColorMatrix            matrix = new ColorMatrix();
             ColorMatrixColorFilter filter;
             if(holder.bought){
@@ -66,49 +63,43 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
                 holder.imageView.setColorFilter(filter);
                 holder.itemTV.setPaintFlags(holder.itemTV.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.bought = true;
-                Toast.makeText(context, "Comprou " + data.get(holder.getAdapterPosition()).toUpperCase(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.purchased) + data.get(holder.getAdapterPosition()).toUpperCase(), Toast.LENGTH_SHORT).show();
             }
             });
 
         //LONG CLICK TO EDIT QUANTITY
         holder.imageView.setOnLongClickListener(v -> {
-            if (holder.edtingVisible) {
+            if (holder.editingVisible) {
                 holder.fabAddItem.hide();
                 holder.fabRemoveItem.hide();
-                holder.edtingVisible = false;
+                holder.editingVisible = false;
             } else {
                 holder.fabAddItem.show();
                 holder.fabRemoveItem.show();
-                holder.edtingVisible = true;
+                holder.editingVisible = true;
             }
             return true;
         });
 
         //ADD 1 QUANTITY
-        holder.fabAddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int temp = Integer.valueOf(data.get(holder.getAdapterPosition()).split(" ")[0]) + 1;
-                MainActivity.speechAsText.set(holder.getAdapterPosition()/2, String.valueOf(temp));
-                data.set(holder.getAdapterPosition(), temp + " " + data.get(holder.getAdapterPosition()).split(" ")[1]);
-                holder.itemTV.setText(data.get(holder.getAdapterPosition()));
-            }
+        holder.fabAddItem.setOnClickListener(v -> {
+            int temp = Integer.parseInt(data.get(holder.getAdapterPosition()).split(" ")[0]) + 1;
+            MainActivity.speechAsText.set(holder.getAdapterPosition()/2, String.valueOf(temp));
+            data.set(holder.getAdapterPosition(), temp + " " + data.get(holder.getAdapterPosition()).split(" ")[1]);
+            holder.itemTV.setText(data.get(holder.getAdapterPosition()));
         });
 
         //REMOVE 1 QUANTITY
-        holder.fabRemoveItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int temp = Integer.valueOf(data.get(holder.getAdapterPosition()).split(" ")[0]) - 1;
+        holder.fabRemoveItem.setOnClickListener(v -> {
+            int temp = Integer.parseInt(data.get(holder.getAdapterPosition()).split(" ")[0]) - 1;
 
-                if(temp > 0) {
-                    data.set(holder.getAdapterPosition(), temp + " " + data.get(holder.getAdapterPosition()).split(" ")[1]);
-                    MainActivity.speechAsText.set(holder.getAdapterPosition()/2, String.valueOf(temp));
-                    holder.itemTV.setText(data.get(holder.getAdapterPosition()));
-                }
-                else{
-                    Toast.makeText(context, "Arraste para o lado para remover", Toast.LENGTH_SHORT).show();
-                }
+            if(temp > 0) {
+                data.set(holder.getAdapterPosition(), temp + " " + data.get(holder.getAdapterPosition()).split(" ")[1]);
+                MainActivity.speechAsText.set(holder.getAdapterPosition()/2, String.valueOf(temp));
+                holder.itemTV.setText(data.get(holder.getAdapterPosition()));
+            }
+            else{
+                Toast.makeText(context, context.getResources().getString(R.string.swipeToRemove), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -118,12 +109,12 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView             itemTV;
         ImageView            imageView;
         FloatingActionButton fabAddItem, fabRemoveItem;
-        boolean              bought        = false;
-        boolean              edtingVisible = false;
+        boolean              bought         = false;
+        boolean              editingVisible = false;
 
 
         public ViewHolder(@NonNull View itemView) {

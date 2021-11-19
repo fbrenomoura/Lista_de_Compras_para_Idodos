@@ -35,6 +35,12 @@
     <string name="tryAgain">Tentar novamente</string>
     <string name="exit">Sair</string>
     <string name="close">Fechar</string>
+    <string name="purchased">COMPROU</string>
+    <string name="listening">OUVINDO...</string>
+    <string name="processing">AGUARDE PROCESSANDO...</string>
+    <string name="removed">Item removido</string>
+    <string name="permissionOk">Permissão de audio concedida</string>
+    <string name="swipeToRemove">Arraste para o lado para remover</string>
     <string name="activateTutorial">Ativar audiodescrição</string>
 
     <string name="audioTutorialMain">Olá, bem vindo ao tutorial em audiodescrição. Vou te ajudar a usar esse aplicativo.

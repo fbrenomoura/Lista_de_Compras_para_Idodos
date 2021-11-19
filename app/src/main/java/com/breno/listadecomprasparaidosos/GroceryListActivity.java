@@ -34,11 +34,12 @@ public class GroceryListActivity extends AppCompatActivity {
     public         RecycleAdapter       recycleAdapter;
     public         RelativeLayout       relativeLayout;
     private        FloatingActionButton fabMic, fabHelpList;
-    private        LottieAnimationView  micAnimationAdd;
-    public  static SpeechRecognizer     speechRecognizerAdd;
 
-    public ArrayList<String> itemArray = getPreparedArrayList();
-    public ArrayList<URL>    imagesURL = GoogleCSE.setImagesOnList(itemArray);
+    private        LottieAnimationView  micAnimationAdd;
+    private  static SpeechRecognizer    speechRecognizerAdd;
+
+    private ArrayList<String> itemArray = getPreparedArrayList();
+    private ArrayList<URL>    imagesURL = GoogleCSE.setImagesOnList(itemArray);
 
     public GroceryListActivity() throws IOException {
 
@@ -92,7 +93,7 @@ public class GroceryListActivity extends AppCompatActivity {
 
                 micAnimationAdd.setVisibility(View.VISIBLE);
                 micAnimationAdd.playAnimation();
-                Toast.makeText(GroceryListActivity.this, "OUVINDO...", Toast.LENGTH_LONG).show();
+                Toast.makeText(GroceryListActivity.this, getResources().getString(R.string.listening), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -110,7 +111,7 @@ public class GroceryListActivity extends AppCompatActivity {
                 micAnimationAdd.pauseAnimation();
                 micAnimationAdd.cancelAnimation();
                 micAnimationAdd.setVisibility(View.INVISIBLE);
-                Toast.makeText(GroceryListActivity.this, "PAROU DE OUVIR", Toast.LENGTH_LONG).show();
+                Toast.makeText(GroceryListActivity.this, getResources().getString(R.string.processing), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -162,7 +163,7 @@ public class GroceryListActivity extends AppCompatActivity {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            Snackbar snackbar = Snackbar.make(relativeLayout, "Item removido", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(relativeLayout, getResources().getString(R.string.removed), Snackbar.LENGTH_LONG);
             snackbar.show();
 
             MainActivity.speechAsText.remove(viewHolder.getAdapterPosition());

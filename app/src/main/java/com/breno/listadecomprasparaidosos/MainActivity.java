@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     //TTS NOT SPEAKING - OK
                 }
                 micAnimation.playAnimation();
-                Toast.makeText(MainActivity.this, "OUVINDO...", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.listening), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             public void onEndOfSpeech() {
                 micAnimation.pauseAnimation();
                 micAnimation.cancelAnimation();
-                Toast.makeText(MainActivity.this, "PAROU DE OUVIR", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.processing), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == recordAudioRequestCode && grantResults.length > 0 ){
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                Toast.makeText(this,"Permissão de audio concedida",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getResources().getString(R.string.permissionOk),Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -261,25 +261,25 @@ public class MainActivity extends AppCompatActivity {
 
     static String getIntNumberFromText(String strNum) {
         int ret = -1;
-        if(strNum.contains("um"))
+        if(strNum.contains("um") || strNum.contains("one"))
             ret = 1;
-        else if(strNum.contains("dois"))
+        else if(strNum.contains("dois") || strNum.contains("two"))
             ret = 2;
-        else if(strNum.contains("três"))
+        else if(strNum.contains("três") || strNum.contains("three"))
             ret = 3;
         else if(strNum.contains("tres"))
             ret = 3;
-        else if(strNum.contains("quatro"))
+        else if(strNum.contains("quatro") || strNum.contains("four"))
             ret = 4;
-        else if(strNum.contains("cinco"))
+        else if(strNum.contains("cinco") || strNum.contains("five"))
             ret = 5;
-        else if(strNum.contains("seis"))
+        else if(strNum.contains("seis") || strNum.contains("six"))
             ret = 6;
-        else if(strNum.contains("sete"))
+        else if(strNum.contains("sete") || strNum.contains("seven"))
             ret = 7;
-        else if(strNum.contains("oito"))
+        else if(strNum.contains("oito") || strNum.contains("eight"))
             ret = 8;
-        else if(strNum.contains("nove"))
+        else if(strNum.contains("nove") || strNum.contains("nine"))
             ret = 9;
 
         return String.valueOf(ret);
