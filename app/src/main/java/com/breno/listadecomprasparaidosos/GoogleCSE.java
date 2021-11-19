@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,7 @@ public class GoogleCSE extends Thread {
         try{
             downloadThread.join();
         } catch (InterruptedException e) {
+            downloadThread.interrupt();
             e.printStackTrace();
         }
 
@@ -34,7 +34,7 @@ public class GoogleCSE extends Thread {
         return imageURL;
     }
 
-    static ArrayList<URL> setImagesOnList(ArrayList<String> items) throws IOException {
+    static ArrayList<URL> setImagesOnList(ArrayList<String> items) {
         ArrayList<URL> imagesUrl = new ArrayList<>();
 
         for(int i = 0; i < items.size(); i++){
@@ -70,38 +70,48 @@ public class GoogleCSE extends Thread {
         }
 
         HttpURLConnection conn = null;
-        try {
-            conn = (HttpURLConnection) url.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (url != null) {
+            try {
+                conn = (HttpURLConnection) url.openConnection();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        try {
-            conn.setRequestMethod("GET");
-        } catch (ProtocolException e) {
-            e.printStackTrace();
+
+        if(conn != null){
+            try {
+                conn.setRequestMethod("GET");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conn.setRequestProperty("Accept", "application/json");
+            }
         }
 
-        conn.setRequestProperty("Accept", "application/json");
         BufferedReader br = null;
 
-        try {
-            br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (conn != null){
+            try {
+                br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
 
         //The response is json
         //Process to find URL from json
         String output = null;
         while (true) {
             try {
-                if ((output = br.readLine()) == null) break;
+                if ((output = br.readLine()) == null && br != null) break;
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            if (output.contains("\"link\": \"")) {
+            if (output.contains("\"link\": \"") && output != null) {
 
                 link = output.substring(output.indexOf("\"link\": \"") + ("\"link\": \"").length(),
                         output.indexOf("\","));

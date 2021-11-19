@@ -63,7 +63,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
                 holder.imageView.setColorFilter(filter);
                 holder.itemTV.setPaintFlags(holder.itemTV.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.bought = true;
-                Toast.makeText(context, context.getResources().getString(R.string.purchased) + data.get(holder.getAdapterPosition()).toUpperCase(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.purchased) + " " + data.get(holder.getAdapterPosition()).toUpperCase(), Toast.LENGTH_SHORT).show();
             }
             });
 

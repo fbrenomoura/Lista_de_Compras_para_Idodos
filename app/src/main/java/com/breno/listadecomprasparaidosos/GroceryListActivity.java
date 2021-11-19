@@ -215,12 +215,8 @@ public class GroceryListActivity extends AppCompatActivity {
             MainActivity.speechAsText.addAll(temp);
 
             itemArray = getPreparedArrayList();
+            imagesURL = GoogleCSE.setImagesOnList(itemArray);
 
-            try {
-                imagesURL = GoogleCSE.setImagesOnList(itemArray);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             recycleAdapter = new RecycleAdapter(GroceryListActivity.this, itemArray, imagesURL);
             recyclerView.setAdapter(recycleAdapter);
             //recycleAdapter.notifyDataSetChanged();
