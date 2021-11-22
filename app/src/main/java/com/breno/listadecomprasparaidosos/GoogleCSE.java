@@ -52,91 +52,58 @@ public class GoogleCSE extends Thread {
     //NETWORK OPERATION - GETTING IMAGE URL
     @Override
     public void run() {
-        String            link;
-        List<String>      linkList      = new ArrayList<>();
-        HttpURLConnection urlConnection;
-        String            apiUrlRequest;
-
-        if (useRestrictedApi)
-            apiUrlRequest = "https://www.googleapis.com/customsearch/v1/siterestrict?key=" + API_KEY + "&cx=" + SEARCH_ENGINE_ID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
-        else
-            apiUrlRequest = "https://www.googleapis.com/customsearch/v1?key=" + API_KEY + "&cx=" + SEARCH_ENGINE_ID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
-
-        URL url = null;
-        try {
-            url = new URL(apiUrlRequest);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        HttpURLConnection conn = null;
-
-        if (url != null) {
-            try {
-                conn = (HttpURLConnection) url.openConnection();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        if(conn != null){
-            try {
-                conn.setRequestMethod("GET");
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                conn.setRequestProperty("Accept", "application/json");
-            }
-        }
-
-        BufferedReader br = null;
-
-        if (conn != null){
-            try {
-                br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        //The response is json
-        //Process to find URL from json
-        String output = null;
-        while (true) {
-            try {
-                if ((output = br.readLine()) == null && br != null) break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if (output.contains("\"link\": \"") && output != null) {
-
-                link = output.substring(output.indexOf("\"link\": \"") + ("\"link\": \"").length(),
-                        output.indexOf("\","));
-                linkList.add(link);
-            }
-        }
-        conn.disconnect();
-
-        //The process of downloading an image from a URL.
 
         try {
-            imageURL = new URL(linkList.get(0));
+            String link;
+            List<String> linkList = new ArrayList<>();
+            HttpURLConnection urlConnection;
+            String apiUrlRequest;
 
-            urlConnection = (HttpURLConnection) imageURL.openConnection();
-            //If true, allow redirects
-            urlConnection.setInstanceFollowRedirects(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) { //IMAGES NOT FOUND - USE BLACK SCREEN INSTEAD
-            try {
-                imageURL = new URL("https://www.solidbackgrounds.com/images/1200x600/1200x600-black-solid-color-background.jpg");
-            } catch (MalformedURLException malformedURLException) {
-                malformedURLException.printStackTrace();
+            if (useRestrictedApi)
+                apiUrlRequest = "https://www.googleapis.com/customsearch/v1/siterestrict?key=" + API_KEY + "&cx=" + SEARCH_ENGINE_ID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
+            else
+                apiUrlRequest = "https://www.googleapis.com/customsearch/v1?key=" + API_KEY + "&cx=" + SEARCH_ENGINE_ID + "&q=imagesize%3A1200x600+" + query + "&searchType=image";
+
+            URL url = new URL(apiUrlRequest);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+
+            BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+            //The response is json
+            //Process to find URL from json
+            String output;
+            while ((output = br.readLine()) != null) {
+
+                if (output.contains("\"link\": \"")) {
+
+                    link = output.substring(output.indexOf("\"link\": \"") + ("\"link\": \"").length(),
+                            output.indexOf("\","));
+                    linkList.add(link);
+                }
             }
+            conn.disconnect();
+
+            //The process of downloading an image from a URL.
+
+            try {
+                imageURL = new URL(linkList.get(0));
+
+                urlConnection = (HttpURLConnection) imageURL.openConnection();
+                //If true, allow redirects
+                urlConnection.setInstanceFollowRedirects(true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) { //IMAGES NOT FOUND - USE BLACK SCREEN INSTEAD
+                try {
+                    imageURL = new URL("https://www.solidbackgrounds.com/images/1200x600/1200x600-black-solid-color-background.jpg");
+                } catch (MalformedURLException malformedURLException) {
+                    malformedURLException.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 }
