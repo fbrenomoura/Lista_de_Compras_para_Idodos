@@ -5,7 +5,7 @@
     <string name="aboutTitle">Sobre a aplicação</string>
     <string name="micTitle">CLIQUE NO MICROFONE</string>
     <string name="micText">FALE A QUANTIDADE E EM SEGUIDA O PRODUTO</string>
-    <string name="aboutMessage">Aplicação desenvolvida sem fins lucrativos e com propositos exclusivamente educacionais, para estudos de aplicabilidade de:\n
+    <string name="aboutMessage">Aplicação desenvolvida sem fins lucrativos e com propósitos exclusivamente educacionais, para estudos de aplicabilidade de:\n
     - LottieAnimationView (Lottie API)\n
     - Picasso library\n
     - SpeechReconizer API\n
@@ -50,7 +50,7 @@
         Nesse momento você pode falar a quantidade e em seguida o produto que deseja adicionar na lista.
         Por exemplo: 3 Cenouras, 5 cebolas, 4 farinhas... Ao terminar de falar. A animação do microfone irá pausar.
         Indicativo de que a aplicação parou de ouvir. e está processando a sua lista de compras. Se o aplicativo entender
-        corretamente o que você falou. sua lista será exibida, caso contrario uma mensagem de erro é exibida, informando que você deverá tentar novamente.</string>
+        corretamente o que você falou. sua lista será exibida. Caso contrário uma mensagem de erro é exibida, informando que você deverá tentar novamente.</string>
 
     <string name="audioTutorialList">Essa é a sua lista de compras. Você pode tocar em um item rapidamente para marcar como comprado. Arrastar o item para fora para remover,
     pressionar o item para alterar a sua quantidade. Para adicionar um novo item toque no microfone azul e fale a quantidade em seguida o nome do produto.</string>

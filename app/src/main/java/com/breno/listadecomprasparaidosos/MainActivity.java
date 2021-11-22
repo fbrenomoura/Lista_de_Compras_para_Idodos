@@ -329,7 +329,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initTTSMain(){
-        ttsMain = new TextToSpeech(getApplicationContext(), status -> ttsMain.setLanguage(new Locale(Locale.getDefault().getLanguage(), Locale.getDefault().getISO3Country())));
+        ttsMain = new TextToSpeech(getApplicationContext(),
+                new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int status) {
+                        if(status != TextToSpeech.ERROR){
+                            ttsMain.setLanguage(new Locale(Locale.getDefault().getLanguage(), Locale.getDefault().getISO3Country()));
+                        }
+                    }
+                });
+
     }
 
     static boolean isEnableAudioDescription() {

@@ -4,7 +4,18 @@
     <string name="aboutTitle">About the application</string>
     <string name="micTitle">CLICK ON THE MICROPHONE</string>
     <string name="micText">SPEAK THE QUANTITY AND THEN THE PRODUCT</string>
-    <string name="aboutMessage">"Application developed for non-profit and educational purposes only, to study the applicability of:      - LottieAnimationView (Lottie API)      - Picasso library      - SpeechReconizer API      - TextToSpeech (TTS API)      - RecycleView      - Google Cloud Platform      - Google Custom Search API      -SonarQube      - Kanban      - Clean Code  Icons produced by: Freepik, Pixel perfect, Aneesh Ravi, SolidsBackgrounds.com, Maxim Basinski Premium, EmojiSky, Vasyl Kolodiychyk.   Breno Moura is Bachelor's Degree in Computer Engineering (Federal University of Ceará), MSc,     Communication and Arts (Federal University of Paraíba) and is currently a Software Engineer in private enterprise.   E-mail: fbrenomoura@gmail.com "</string>
+    <string name="aboutMessage">"Application developed for non-profit and educational purposes only, to study the applicability of:      \n- LottieAnimationView (Lottie API)
+        \n- Picasso library
+        \n- SpeechReconizer API
+        \n- TextToSpeech (TTS API)
+        \n- RecycleView
+        \n- Google Cloud Platform
+        \n- Google Custom Search API
+        \n- SonarQube
+        \n- Kanban
+        \n- Clean Code
+        \n\nIcons produced by: Freepik, Pixel perfect, Aneesh Ravi, SolidsBackgrounds.com, Maxim Basinski Premium, EmojiSky, Vasyl Kolodiychyk.
+        \n\n\nBreno Moura is Bachelor's Degree in Computer Engineering (Federal University of Ceará), MSc student inCommunication and Arts (Federal University of Paraíba) and is currently a Software Engineer in private enterprise.   E-mail: fbrenomoura@gmail.com "</string>
     <string name="reconFailure">Recognition failure</string>
     <string name="helpTitle">How to use the application:</string>
     <string name="helpMsg">Click on the microphone and speak in order of quantity of items and product, example:     5 beans, 1 rice, 2 onions, 1 noodles.  Need more help? Activate the audio description tutorial.</string>
