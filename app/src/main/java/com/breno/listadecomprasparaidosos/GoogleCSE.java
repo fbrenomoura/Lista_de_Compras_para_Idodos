@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleCSE extends Thread {
-    private static final String  API_KEY          = "YOUR_API_KEY";
-    private static final String  SEARCH_ENGINE_ID = "YOUR_ID";
+    private static final String  API_KEY          = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
+    private static final String  SEARCH_ENGINE_ID = "124702026900ad302";
     private static       boolean useRestrictedApi;
     private static       String  query;
     private static       URL     imageURL       = null;
