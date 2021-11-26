@@ -66,6 +66,7 @@ public class GoogleCSE extends Thread {
 
             URL url = new URL(apiUrlRequest);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(7000);
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
 

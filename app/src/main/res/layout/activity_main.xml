@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             app:lottie_autoPlay="false"
             app:lottie_loop="true"
-            app:lottie_url="@string/micAnimationUrl" />
+            app:lottie_rawRes="@raw/miclottieanimation" />
 
     </LinearLayout>
 

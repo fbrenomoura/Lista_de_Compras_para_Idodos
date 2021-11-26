@@ -44,6 +44,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemTV.setText(data.get(holder.getAdapterPosition()));
+        System.out.println("URL: " + image.get(holder.getAdapterPosition()).toString());
         Picasso.get().load(image.get(holder.getAdapterPosition()).toString()).into(holder.imageView);
 
         //SHORT CLICK TO MARK AS PURCHASED
