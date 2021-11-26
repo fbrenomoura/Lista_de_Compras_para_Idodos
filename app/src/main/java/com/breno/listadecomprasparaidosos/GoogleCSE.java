@@ -94,8 +94,6 @@ public class GoogleCSE extends Thread {
                 urlConnection = (HttpURLConnection) imageURL.openConnection();
                 //If true, allow redirects
                 urlConnection.setInstanceFollowRedirects(true);
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (Exception e) { //IMAGES NOT FOUND - USE BLACK SCREEN INSTEAD
                 try {
                     imageURL = new URL("https://www.solidbackgrounds.com/images/1200x600/1200x600-black-solid-color-background.jpg");

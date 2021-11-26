@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +46,12 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemTV.setText(data.get(holder.getAdapterPosition()));
         System.out.println("URL: " + image.get(holder.getAdapterPosition()).toString());
-        Picasso.get().load(image.get(holder.getAdapterPosition()).toString()).into(holder.imageView);
+        /*Picasso.get()
+                .load(image.get(holder.getAdapterPosition()).toString())
+                .resize(1200,600)
+                .noFade()
+                .into(holder.imageView);*/
+        Glide.with(context).load(image.get(holder.getAdapterPosition()).toString()).into(holder.imageView);
 
         //SHORT CLICK TO MARK AS PURCHASED
         holder.imageView.setOnClickListener(v -> {
