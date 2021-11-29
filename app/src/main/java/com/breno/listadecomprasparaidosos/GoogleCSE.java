@@ -1,5 +1,9 @@
 package com.breno.listadecomprasparaidosos;
 
+import android.os.AsyncTask;
+
+import androidx.annotation.NonNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,22 +12,22 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class GoogleCSE extends Thread {
-    private static final String  API_KEY          = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
-    private static final String  SEARCH_ENGINE_ID = "124702026900ad302";
-    private static       boolean useRestrictedApi;
-    private static       String  query;
-    private static       URL     imageURL       = null;
+    private static final String API_KEY = "AIzaSyCYhMrCoQ9smWJJn7axXuz-wooweThQtXU";
+    private static final String SEARCH_ENGINE_ID = "124702026900ad302";
+    private static boolean useRestrictedApi;
+    private static String query;
+    private static URL imageURL = null;
 
     private static URL getImageCSE(String queryTerm, boolean restrictedApi) {
-        useRestrictedApi = restrictedApi;
-        query            = queryTerm;
+        query = queryTerm;
 
         Thread downloadThread = new GoogleCSE();
         downloadThread.start();
 
-        try{
+        try {
             downloadThread.join();
         } catch (InterruptedException e) {
             downloadThread.interrupt();
@@ -34,17 +38,16 @@ public class GoogleCSE extends Thread {
         return imageURL;
     }
 
+    @NonNull
     static ArrayList<URL> setImagesOnList(ArrayList<String> items) {
         ArrayList<URL> imagesUrl = new ArrayList<>();
 
-        for(int i = 0; i < items.size(); i++){
-            try {
-                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], false));
-            } catch (Exception e) {
-                //ALL WEB SEARCH API QUOTA REACHED LIMIT - USE RESTRICTED API INSTEAD
-                imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], true));
+        for (int i = 0; i < items.size(); i++) {
+            imagesUrl.add(getImageCSE(items.get(i).split(" ", 2)[1], useRestrictedApi));
+            if (imagesUrl.get(i) == null) {
+                useRestrictedApi = true; //ALL FREE QUOTA USED - USE RESTRICTED API INSTEAD
+                imagesUrl.set(i, getImageCSE(items.get(i).split(" ", 2)[1], useRestrictedApi));
             }
-
         }
         return imagesUrl;
     }
@@ -66,7 +69,6 @@ public class GoogleCSE extends Thread {
 
             URL url = new URL(apiUrlRequest);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(7000);
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
 
@@ -94,7 +96,7 @@ public class GoogleCSE extends Thread {
                 urlConnection = (HttpURLConnection) imageURL.openConnection();
                 //If true, allow redirects
                 urlConnection.setInstanceFollowRedirects(true);
-            } catch (Exception e) { //IMAGES NOT FOUND - USE BLACK SCREEN INSTEAD
+            } catch (Exception e) { //IMAGE NOT FOUND - USE BLACK SCREEN INSTEAD
                 try {
                     imageURL = new URL("https://www.solidbackgrounds.com/images/1200x600/1200x600-black-solid-color-background.jpg");
                 } catch (MalformedURLException malformedURLException) {

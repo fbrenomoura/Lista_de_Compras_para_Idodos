@@ -46,12 +46,13 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemTV.setText(data.get(holder.getAdapterPosition()));
         System.out.println("URL: " + image.get(holder.getAdapterPosition()).toString());
-        Picasso.get()
+         /*Picasso.get()
                 .load(image.get(holder.getAdapterPosition()).toString())
-                .resize(1200,600)
-                .noFade()
+                .into(holder.imageView);*/
+
+        Glide.with(context)
+                .load(image.get(holder.getAdapterPosition()).toString())
                 .into(holder.imageView);
-        //Glide.with(context).load(image.get(holder.getAdapterPosition()).toString()).into(holder.imageView);
 
         //SHORT CLICK TO MARK AS PURCHASED
         holder.imageView.setOnClickListener(v -> {
